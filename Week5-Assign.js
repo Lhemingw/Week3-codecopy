@@ -46,17 +46,18 @@ class Menu {
     }
     start() {
         let selection =this.showMainMenuOptions();
+            console.log("prompt:", selection);
         while (selection != 0){
                 selection = this.showMainMenuOptions();
-            switch (selection ){
-                case 1:
-                    this.createCharacterMenu();
+            switch(selection){
+                case "1":
+                    this.createEnterprise();
                     break;
-                case 2:
-                    this.viewCharactersMenu();
+                case "2":
+                    this.viewNextGen();
                     break;
-                case 3:
-                    this.redShirtCharacterMenu();
+                case "3":
+                    this.redShirtNextGen();
                     break;
                 default:
                     selection = 0;    
@@ -68,13 +69,12 @@ class Menu {
         //valadate the user input, users are unprededectable
         showMainMenuOptions() {
             return prompt(`Enter your selection, Main Menu:\n 
-             1. Create New NextGen Character" + "\n" +
-             2. View all NextGen Character" + "\n" +
-             3. Red Shirt a NextGen Character" + "\n" +
-             0. Exit \n  
+             1. Create New NextGen Character\n
+             2. View all NextGen Character\n
+             3. Red Shirt a NextGen Character\n
+             0. Exit\n  
             `);
         }
-}
 
         // Added Enterprise Menu Options****** I think this is what I need
     enterpriseMenuOptions(enterpriseInfo) {
@@ -107,12 +107,15 @@ class Menu {
 
              //alert(enterpriseString);
             //add description of all NextGen
-    viewEnterpriseCharactersMenu() {
+    createEnterprise() {
+        console.log("Creating Enterprise...");
+    }
+    viewEnterprise() {
             console.log("View NextGen Characters");
             const characters = this.enterprise.names;
             console.log(characters); //added new
         }
-    redShirtEnterpriseCharacterMenu(){
+    redShirtEnterprise(){
             console.log("Red Shirt a NextGen character");
             let index = prompt(`Enter the index of the character you wish to Red Shirt:`);
             if (index > -1 && index < this.names.length) {
@@ -133,7 +136,8 @@ class Menu {
             }
     }
 
-        createNextGet() {
+        createNextGen() {
+        console.log("Creating NextGen....");
             let name = prompt(`Enter name of New NextGen:`);
             let rank = prompt (`Enter rank of New NextGen:`);
             this.selectedEnterprise.NextGen.push(new NextGen(name, rank));
@@ -141,12 +145,12 @@ class Menu {
 
         redShirtNextGen() {
             let index = prompt(`Enter the index of the NextGen you wish to red shirt:`);
-            if( indext >-1 && index < this.selectedEnterprise.NextGen.length); {
+            if( index >-1 && index < this.selectedEnterprise.NextGen.length); {
             this.selectedEnterprise.NextGen.splice(index, -1);
             }    
         }
-    //}
-    let menu =new Menu();
+}
+    let menu =new Menu(); //var of the instance of the main menu, this runs first
     menu.start()
 
     //const redShirt = this.enterprise.names;  //or do I need what my show create character menu looks like?
