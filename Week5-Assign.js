@@ -4,14 +4,14 @@
     //Use at least two classes.
     //Your menu should have the options to create, view, and delete elements.
 class NextGen {
-    constructor(names, rank) {
-        this.name = names;
+    constructor(name, rank) {
+        this.name = name;
         this.rank = rank;    
     }
 //We start with the NextGen class, and names and rank.
 //describe method just to print out information about our player
     describe() {
-        return `${this.names} is assigned ${this.rank}`;
+        return `${this.name} is assigned ${this.rank}`;
     }
 
 }
@@ -19,14 +19,14 @@ class NextGen {
 //so when we create a new ship we will have a blank array, we will do that in the constructor
 class Enterprise {
     constructor() {
-        this.names = [];
+        this.name = [];
         this.rank;
     }
 
     //Write addName that will take a new name. instanceof operator make sure it it a NextGen
-    addName(names){
-        if (names instanceof NextGen) {
-            this.names.push(names);
+    addName(name){  //do I need to change names to name?
+        if (name instanceof NextGen) {
+            this.name.push(name);
         } else {
             throw newError (`you can only add an instance of argument is not a names a name: ${names}`);
         }
@@ -34,7 +34,7 @@ class Enterprise {
 
         //Does what the top describe does
         describe(){
-            return `Enterprise has ${this.names.length} has ${this.rank.length} names.`;
+            return `Enterprise has ${this.name.length} has ${this.rank.length} names.`;
         }
     }
     //Create menu class what the menu does, how many NextGen we have and rank. Drive app, and sub menus to add members
@@ -59,8 +59,8 @@ class Menu {
                     this.createEnterpriseCharacterMenu();
                     break;
                 case "2":
-                    this.viewNextGen();
-                    break;
+                    this.viewNextGen(); //I had viewNextGen here, I think Enterprise needs to go here, 
+                    break;  //viewNexGen is not a function, but Enterprise (the team, or ship in this case is)
                 case "3":
                     this.redShirtNextGen();
                     break;
@@ -71,7 +71,7 @@ class Menu {
                     selection = 0;   //select anything else, we set it to 0.   Outside of our switch, we get the selection at the beginning 
                     //We also want to get the selection again while we're still inside, so it keeps looping as long as we do not select zero or select something other than 3
             }
-            //selection = this.showMainMenuOptions();  //flow of our menu options
+            selection = this.showMainMenuOptions();  //flow of our menu options
         }
         alert(`Goodbye!`);
     }
@@ -126,10 +126,10 @@ class Menu {
         let selection = this.enterpriseMenuOptions();
         switch (selection) {
             case "1":
-                this.createEnterprise
+                this.createEnterprise();
                 break;
             case "2":
-                this.redShirtEnterprise
+                this.redShirtEnterprise();
                 break;
             default:
                 selection = 0;
@@ -140,27 +140,42 @@ class Menu {
     
     viewEnterprise() {  //NEED HELP!!!
             console.log("View NextGen Characters");
-            const characters = this.enterprise.names;
-            console.log(characters); //added new
+            const characters = this.enterprise; //took out .names;
+            console.log(enterprise.name); //added new, I had (characters) here change to current
             //if (index > -1 && <this.Enterprise.length) {
-                this.selectedEnterprise = this.Enterprise[index]; 
-                let description = `Enterprise: ` + this.selectedEnterprise.name + `\n`;
-                for (let i = 0; i < this.selectedEnterprise.NextGen.length; i++) {
-                    //description += i +`) `+
-                    this.selectedEnterprise.NextGen[i].name + `-`
-                    description += i + `)` +
-                    this.selectedEnterprise.NextGen[i].describe() + `\n`;
-                    this.selectedEnterprise.NextGen[i].rank
+                let index = prompt ("Enter the index of the team that you want to view:");
+                if (index > -1 && index < enterprise.names.length) {
+                    const selectedEnterprise = Enterprise.names[index]; 
+                    let description = `Enterprise:  + ${selectedEnterprise.name}\n`;
+                    for (let i = 0; i < selectedEnterprise.NextGen.length; i++) {
+                        description += `${i}) ${selectedEnterprise.NextGen[i].describe()}\n`;
+                    }
+                    console.log(description);
+                        // this.selectedEnterprise.NextGen[i].name + `-`
+                        // description += i + `)` +
+                        // this.selectedEnterprise.NextGen[i].describe() + `\n`;
+                        // this.selectedEnterprise.NextGen[i].rank
+                    }
                 }
+
+                
+                
+        //         for (let i = 0; i < this.selectedEnterprise.NextGen.length; i++) {
+        //             //description += i +`) `+
+        //             this.selectedEnterprise.NextGen[i].name + `-`
+        //             description += i + `)` +
+        //             this.selectedEnterprise.NextGen[i].describe() + `\n`;
+        //             this.selectedEnterprise.NextGen[i].rank
+        //         }
                     
-    }
-            }
-        }
+        // }
+    
+        
     redShirtEnterprise(){
             console.log("Red Shirt a NextGen character");
             let index = prompt(`Enter the index of the character you wish to Red Shirt:`);
-            if (index > -1 && index < this.names.length) {
-             this.names.splice(index1);
+            if (index > -1 && index < this.enterprise.names.length) {
+             this.enterprisenames.splice(index1);
             }
         
         let selection =this.enterpriseMenuOptions(descriptions);
@@ -172,7 +187,10 @@ class Menu {
                     break;
                     case 2:
                     this.redShirtNexGenMenu();
-                 }      
+                 }      //The enterpriseMenuOptions() method should be called with enterpriseInfo parameter, 
+                        //which is missing in the current code.
+                        //The createNextGenMenu() and redShirtNexGenMenu() methods are referenced 
+                         //but not defined. What to do with this info???
             
             }
     }
@@ -204,7 +222,7 @@ class Menu {
             {this.selectedEnterprise.NextGen.splice(index, -1);
             }    
         }
-    }
+}
 
     let menu =new Menu(); //var of the instance of the main menu, this runs first
     menu.start()
